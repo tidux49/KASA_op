@@ -1,147 +1,65 @@
 import React from 'react'
 import tableau from './tableaux';
+import Animation_depliant from '../animation_dépliant';
+import {useParams } from 'react-router-dom';
+import './description_style.css';
+
+import Banner from './C_banner/Banner';
+import Tags from './C_tags/Tags';
+import Titre from './C_titre/Titre';
+import Lieu from './C_lieu/Lieu';
+import Host from './C_host/Host';
+import Etoiles from './C_etoiles/Etoiles';
 
 
 
 
-function Etoiles(){
-    return(
-        <div classe="etoiles">
-            <i class="" id="e_1"></i>
-            <i class="" id="e_2"></i>
-            <i class="" id="e_3"></i>
-            <i class="" id="e_4"></i>
-            <i class="" id="e_5"></i>
-        </div>
-    )
-}
-
-function Tags(){
-    const id_description = localStorage.getItem("description_number");
-        const index = tableau.findIndex(({id}) => id === id_description);
-        console.log(tableau[index].id);
-          
-            if(index !== -1){
-                console.log("c'est bon");
-                return(
-                    <div class="tags">
-                        {tableau[index].tags.map((tag, index) => (
-                        <div className="tag" key={`${tag}-${index}`}>
-                         <p>{tag}</p>    
-                    </div>
-                            ))}                 
-                    </div>)}
-            else{
-                console.log("errer");
-                }
-}
-
-function Tags_etoiles(){
-    return(
-        <div class="tages-etoiles">
-            <Tags />
-            <Etoiles />
-        </div>
-    )
-}
-function Paragraphe_description() {
-    const id_description = localStorage.getItem("description_number");
-    const index_description = tableau.findIndex(({ id }) => id === id_description);
-  
-    if (index_description !== -1) {
-      console.log("C'est bon");
-      return (
-        <section className="paragraphe" key={`description-${index_description}`}>
-          <div className="barre_paragraphe">
-            <h2>Description</h2>
-            <p>logo flèche</p>
-          </div>
-  
-          <div className="texte_paragraphe">
-            <p>{tableau[index_description].description}</p>
-          </div>
-        </section>
-      );
-    } else {
-      console.log("Erreur");
-      return null; // ou un message d'erreur à afficher dans le composant parent
-    }
-  }
-
-function Equipments (){
-    const id_description = localStorage.getItem("description_number");
-    const index_equipement = tableau.findIndex(({ id }) => id === id_description);
-  
-    if (index_equipement !== -1) {
-      console.log("C'est bon");
-      return (
-        <section className="paragraphe" key={`description-${index_equipement}`}>
-          <div className="barre_paragraphe">
-            <h2>Description</h2>
-            <p>logo flèche</p>
-          </div>
-  
-          <div className="texte_paragraphe">
-            <p>{tableau[index_equipement].equipments}</p>
-          </div>
-        </section>
-      );
-    } else {
-      console.log("Erreur");
-      return null; // ou un message d'erreur à afficher dans le composant parent
-    }
-}
-
-function Titre (){
-    const id_description = localStorage.getItem("description_number");
-    const index_titre = tableau.findIndex(({ id }) => id === id_description);
-  
-    if (index_titre !== -1) {
-      console.log("C'est bon");
-      return (
-        <div className="titre" key={`description-${index_titre}`}>
-            <h1>{tableau[index_titre].title}</h1>
-        </div>
-      );
-    } else {
-      console.log("Erreur");
-      return null; // ou un message d'erreur à afficher dans le composant parent
-    }
-}
-
-function Lieu (){
-    const id_description = localStorage.getItem("description_number");
-    const index_lieu = tableau.findIndex(({ id }) => id === id_description);
-  
-    if (index_lieu !== -1) {
-      console.log("C'est bon");
-      return (
-        <div className="location" key={`description-${index_lieu}`}>
-            <h3>{tableau[index_lieu].location}</h3>
-        </div>
-      );
-    } else {
-      console.log("Erreur");
-      return null; // ou un message d'erreur à afficher dans le composant parent
-    }
-}
-
-function Paragraphe_s(){
-    return(
-    <div>
-    <Paragraphe_description />
-    <Equipments />
-    </div>    
-)
-}
 
 function Description(){
+    const {id} = useParams();
+    console.log("c'est id de la page"+id);
+    const id_tableau = id;
+    const index_global = tableau.findIndex(({id}) => id === id_tableau);
+    const tab_equipements = [];
+    let equipements ="";
+    for( let tab of tableau[index_global].equipments ){
+        tab_equipements.push(tab);
+        tab_equipements.push('\n');
+    };
+    for( let a of tab_equipements){
+    equipements = equipements + a;}
+    console.log(equipements);
+    
+    
     return(
-    <div>
-        <Titre />
-        <Lieu />
-        <Tags_etoiles />
-        <Paragraphe_s />
+    <div class="main_description">
+        <Banner tableau={tableau} id_selected={id}/>
+
+        <section class="information">
+
+        <section class="title_tags_section">
+        <section class="titre_lieu_section">
+        <Titre tableau={tableau} id_selected={id} />
+        <Lieu tableau={tableau} id_selected={id} />
+        </section>
+        
+        <Tags tableau={tableau} id_selected={id} />
+        </section>
+
+
+
+        <section class="host_etoiles_section">
+        <Host tableau={tableau} id_selected={id} />
+        <Etoiles tableau={tableau} id_selected={id} />
+        </section>
+
+        </section>
+
+        <section class="descriptif">
+        <Animation_depliant anim_title="description" anim_text={tableau[index_global].description} />
+        <Animation_depliant anim_title="equipements" anim_text={equipements} />
+        </section>
+
     </div>)
 }
 

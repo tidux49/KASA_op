@@ -5,6 +5,8 @@ import Description from './components/description/description';
 import A_propos from './components/a_propos/a_propos';
 import Liens_header from './components/liens_header';
 import Footer from './components/footer';
+import Erreur from './components/erreur/Erreur';
+
 
 
 function App() {
@@ -15,12 +17,15 @@ function App() {
               <Liens_header />
           </nav>
           <Routes>
-            <Route path="/description" element={<Description />}/>
+            <Route path="/description/:id" element={<Description />}/>
             <Route path="/a_propos" element={<A_propos />}/>
-            <Route path="/" element={<Home />}/>
+            <Route path="/home" element={<Home />}/>
+            <Route path="/*" element={<Erreur />}/>
           </Routes>
+          <nav>
+          <Footer />
+          </nav>
       </Router> 
-      <Footer />
     </div>
   );
 }

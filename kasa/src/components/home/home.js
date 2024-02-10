@@ -1,55 +1,29 @@
 import React from 'react'
-import img_kasa from './LOGO.png';
 import img_fond_index from './fond_index.png';
 import tableau from './tableaux';
-import { Link } from 'react-router-dom'
-
-
-function Image_kasa(){
-  return <img class="image_kasa" src={img_kasa}></img>
-}
-
-
-function Header(){
-  return <header><Image_kasa /></header>
-}
-
-
-function Cadres(){
-  const handleClick = (id) => {
-    localStorage.setItem("description_number", id);
-    console.log('Clic sur le lien !');
-  };
-    return(
-      <div class="back_cadre">
-        {tableau.map(({cover, id}) => (
-          <Link to="/description" onClick={() => handleClick(id)} class ="cadre" id={id}>
-          <img class="img_cadre" src={cover}></img>
-      </Link>
-         ))}
-      </div>
-    ) }
+import Cadre from './C_cadre/Cadre';
+import './home_style.css';
 
 function Image_index(){
 
-  const image_index_Style = {
-    backgroundImage  : `url(${img_fond_index})`,
-    backgroundSize: 'cover',
-  };
 
 
-  return <div class="image_index" style={image_index_Style}>
-    <p>Chez vous, partout et ailleur</p>
-  </div>
+  return (
+  <div class="img_index_container">
+    <img class="image_index" src={img_fond_index}></img>
+    <p class="text_img_index">Chez vous, partout et ailleur</p>
+  </div>)
+
 }
 
 function Home(){
-  return <div class="body">
-    <Header />
-    <main>  
+  return <div class="body_home">
     <Image_index />
-    <Cadres />
-    </main>
+    <section class="back_cadre">
+    <div class="grille_cadre">
+    <Cadre tableau={tableau} />
+    </div>
+    </section>
     </div>
 }
 

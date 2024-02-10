@@ -1,5 +1,7 @@
 import React from 'react'
 import img_fond_propos from './fond_propos.png';
+import Animation_depliant from '../animation_dépliant';
+import './a_propos_Style.css';
 
 const liste = [
 
@@ -23,37 +25,21 @@ const liste = [
  ]
 
 
-function Image_kasa(){
-    return <img class="image_kasa" src={img_fond_propos}></img>
-  }
-
-
 function Paragraphe_s(){
     
     return(
 <div class="paragraphes">
         {liste.map(({title, text}) => (
-    <section class ="paragraphe" key={`${title}`}>
-        
-        <div class = "barre_paragraphe">
-            <h2>{title}</h2>
-            <p>logo flèche</p>
-        </div>
-
-        <div class="texte_paragraphe">
-            <p>{text}</p>
-        </div>
-
-    </section>
+                <Animation_depliant anim_title={title} anim_text={text} />
             ))}
 </div>)
 }
 
 function A_propos(){
     return(
-        <div class = "body">
-            <Image_kasa />
-            <Paragraphe_s />
+        <div class = "body_propos">
+            <img class="image_propos" src={img_fond_propos}></img>
+            <Paragraphe_s class="paragraphe_propos"/>
         </div>
     )
 }

@@ -1,10 +1,11 @@
-import img_kasa from './home/LOGO.png'
+import './footer_style.css';
+import img_kasa_footer from './logo-footer.svg';
 
 function Footer(){
-  return <footer>
-    <img src={img_kasa}></img>
+  return (<footer>
+    <img class="img_kasa_footer" src={img_kasa_footer}></img>
     <p>© 2020 Kasa. All rights reserved</p>
-  </footer>
+  </footer>)
 }
 
 export default Footer;
