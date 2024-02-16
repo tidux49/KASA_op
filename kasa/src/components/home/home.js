@@ -9,18 +9,18 @@ function Image_index(){
 
 
   return (
-  <div class="img_index_container">
-    <img class="image_index" src={img_fond_index}></img>
-    <p class="text_img_index">Chez vous, partout et ailleur</p>
+  <div className="img_index_container">
+    <img className="image_index" src={img_fond_index}></img>
+    <p className="text_img_index">Chez vous, partout et ailleur</p>
   </div>)
 
 }
 
 function Home(){
-  return <div class="body_home">
+  return <div className="body_home">
     <Image_index />
-    <section class="back_cadre">
-    <div class="grille_cadre">
+    <section className="back_cadre">
+    <div className="grille_cadre">
     <Cadre tableau={tableau} />
     </div>
     </section>

@@ -9,7 +9,7 @@ export default function Cadre({tableau}){
   };
     return(
         tableau.map(({cover, id, title}) => (
-          <section class="cadre">
+          <section class="cadre" key={id}>
           <Link to={`/description/${id}`} onClick={() => handleClick(id)} class ="cadre" id={id}>
           <img class="img_cadre" src={cover}></img>
           </Link>

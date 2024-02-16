@@ -1,7 +1,7 @@
 import React from 'react'
 import tableau from './tableaux';
 import Animation_depliant from '../animation_dépliant';
-import {useParams } from 'react-router-dom';
+import {useParams,} from 'react-router-dom';
 import './description_style.css';
 
 import Banner from './C_banner/Banner';
@@ -13,13 +13,14 @@ import Etoiles from './C_etoiles/Etoiles';
 
 
 
-
-
 function Description(){
     const {id} = useParams();
     console.log("c'est id de la page"+id);
     const id_tableau = id;
     const index_global = tableau.findIndex(({id}) => id === id_tableau);
+    if (index_global === -1) {
+        window.location.href = '/erreur';
+    }
     const tab_equipements = [];
     let equipements ="";
     for( let tab of tableau[index_global].equipments ){
@@ -35,10 +36,10 @@ function Description(){
     <div class="main_description">
         <Banner tableau={tableau} id_selected={id}/>
 
-        <section class="information">
+        <section className="information">
 
-        <section class="title_tags_section">
-        <section class="titre_lieu_section">
+        <section className="title_tags_section">
+        <section className="titre_lieu_section">
         <Titre tableau={tableau} id_selected={id} />
         <Lieu tableau={tableau} id_selected={id} />
         </section>
@@ -48,14 +49,14 @@ function Description(){
 
 
 
-        <section class="host_etoiles_section">
+        <section className="host_etoiles_section">
         <Host tableau={tableau} id_selected={id} />
         <Etoiles tableau={tableau} id_selected={id} />
         </section>
 
         </section>
 
-        <section class="descriptif">
+        <section className="descriptif">
         <Animation_depliant anim_title="description" anim_text={tableau[index_global].description} />
         <Animation_depliant anim_title="equipements" anim_text={equipements} />
         </section>
