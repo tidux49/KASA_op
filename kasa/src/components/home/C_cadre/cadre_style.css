@@ -18,9 +18,19 @@
 .titre_cadre{
   position: absolute;
   color: white;
+  font-size: 1.2em;
   z-index: 10;
   left: 5.88%;
   right: 5.88%;
   top: 78.82%;
   bottom: 5.88%;
+
+  @media screen and (max-width: 940px) { 
+    top: 68.82%;
+    font-size: 1em;
+  }
+  @media screen and (max-width: 760px) { 
+    top: 78.82%;
+    font-size: 1.2em;
+  }
 }
